@@ -41,6 +41,117 @@
         var id_seo = "8";
     </script>
 
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.8.0.min.js"></script>
+                                        
+<script type="text/javascript">
+
+window.addEventListener("load", mediaSizer);
+        //window.addEventListener("resize", mediaSizer);
+        // Listeners that will react when the page first loads or is resized.
+        // If any of these events take place the mediaSizer() function executes.
+
+        var vizList = [
+
+                    "https://demo.tableau.com/t/LuizOliveira/views/Mapwize-ShoppingMallRevenue/ShoppingMallRevenue?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link",
+                    "https://demo.tableau.com/t/LuizOliveira/views/ShoppingSpaces/Shoppingspaces?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link"
+
+                ];
+        // Array of Tableau Server URLs for dashboard or sheet navigation.
+    
+        var viz,
+            vizLen = vizList.length,
+            vizCount = 0,
+            devType;
+        var options = {
+            device: devType,
+        };
+
+
+        function mediaSizer() {
+        // Determines the correct viz layout according to screen sizes.
+            if (window.matchMedia("(max-width: 480px)").matches) {
+                //alert("I am a phone layout!");
+                devType = 'phone';
+                vWidth = 415;
+                vHeight = 2000;
+                //options.device = 'phone';
+            } else if (window.matchMedia("(max-width: 980px)").matches) {
+                //alert("I am a tablet layout!");
+                devType = 'tablet';
+                vWidth = 1600;
+                //options.device = 'tablet';
+            } else {
+                //alert("I am a desktop layout!");
+                devType = 'desktop';
+                vWidth = 1666;
+                vHeight = 900;
+                //options.device = 'desktop';
+            }
+            console.log("devtype: "+devType )
+            console.log("launch0")
+            launchViz(0);
+            console.log("launch1")        
+            launchViz(1);
+  
+
+    
+          
+           
+            // Launches the viz again with the new sizing at the current index of vizList.
+      }
+
+
+      function launchViz(vizNav) {
+        // JS object targeting a div in the html document. (vizNav) will pass navigation values to move back and forth across vizList.
+        console.log("vizContainer"+vizNav)
+        console.log("devtype: "+devType )
+            var vizDiv = document.getElementById("vizContainer"+vizNav),
+            // Will embed the visualization on a div with id="VizContainer"
+            options = {
+                device: devType,
+                width: vWidth,
+                height: vHeight,
+                hideTabs: true,
+                hideToolbar: true,
+                onFirstInteractive: function () {
+                    listenToMarksSelection();
+                }
+            };
+            
+
+            var vizURL = vizList[vizNav];
+            // Dynamic URL returning the string from vizList at index = vizNav (viz to be displayed).
+
+                    try {
+                        // Initializes the viz from the array with desired options. 
+                        viz = new tableau.Viz(vizDiv, vizURL, options);
+                if (!viz) throw 'viz not initialized'
+                    }
+                    catch(err) {
+                        alert(err);
+                    }
+                    finally {
+                        console.log('whatever')
+                        console.count('initViz')
+                    }
+            
+        }
+
+</script>
+
+
+
+
+
+
 </head>
 
 <body id="shopping">
@@ -176,17 +287,17 @@
         <div class="container">
 
             
-            <script type='text/javascript' src='https://demo.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1400px; height: 827px;'><object class='tableauViz' width='1400' height='827' style='display:none;'><param name='host_url' value='https%3A%2F%2Fdemo.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='&#47;t&#47;LuizOliveira' /><param name='name' value='Mapwize-ShoppingMallRevenue&#47;ShoppingMallRevenue' /><param name='tabs' value='no' /><param name='toolbar' value='no' /><param name='showAppBanner' value='false' /></object></div>
-
-
+            <div style="text-align: center;">
+                <div style="display: inline-block;">
+                    <div id="vizContainer0" ></div>
+                </div></div>
             <p>-</p>
+                <div style="text-align: center;">
+                    <div style="display: inline-block;">
+                        <div id="vizContainer1" ></div>
+                    </div></div>
 
-            <script type='text/javascript' src='https://demo.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1400px; height: 827px;'><object class='tableauViz' width='1400' height='827' style='display:none;'><param name='host_url' value='https%3A%2F%2Fdemo.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='&#47;t&#47;LuizOliveira' /><param name='name' value='ShoppingSpaces&#47;Shoppingspaces' /><param name='tabs' value='no' /><param name='toolbar' value='no' /><param name='showAppBanner' value='false' /></object></div>
-
-            <p>-</p>
-
-            <div class='tableauPlaceholder' id='viz1651257005764' style='position: relative'><noscript><a href='#'><img alt='School Performance Summary ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sc&#47;School_15787071447140&#47;SchoolPerformance&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='School_15787071447140&#47;SchoolPerformance' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sc&#47;School_15787071447140&#47;SchoolPerformance&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1651257005764');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1000px';vizElement.style.height='827px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-
+                    
             <div class="info">
                 <div class="logo">
                     <a href=""
